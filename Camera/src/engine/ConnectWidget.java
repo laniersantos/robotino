@@ -56,7 +56,7 @@ public class ConnectWidget extends JComponent {
 				} catch (InterruptedException e1) {
 					System.out.println("Follow Wall error: " + e1.getMessage());
 				}
-			} 
+			}
 
 			buttonConnect.setEnabled(false);
 		}
