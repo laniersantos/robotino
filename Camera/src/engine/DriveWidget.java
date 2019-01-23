@@ -51,37 +51,37 @@ public class DriveWidget extends JComponent {
 
 		setLayout(new GridLayout(3, 5));
 
-		JButton buttonUp = new JButton(getIcon("n"));
-		robot.addListener(new RobotListenerImpl(this));
-		JButton buttonDown = new JButton(getIcon("s"));
-		JButton buttonLeft = new JButton(getIcon("o"));
-		JButton buttonRight = new JButton(getIcon("w"));
-		JButton buttonCL = new JButton(getIcon("cl"));
-		JButton buttonCCL = new JButton(getIcon("ccl"));
+//		JButton buttonUp = new JButton(getIcon("n"));
+//		robot.addListener(new RobotListenerImpl(this));
+//		JButton buttonDown = new JButton(getIcon("s"));
+//		JButton buttonLeft = new JButton(getIcon("o"));
+//		JButton buttonRight = new JButton(getIcon("w"));
+//		JButton buttonCL = new JButton(getIcon("cl"));
+//		JButton buttonCCL = new JButton(getIcon("ccl"));
 		JButton buttonStop = new JButton(getIcon("stop"));
 
-		buttonUp.addActionListener(new ButtonListener(speed, 0.0f, 0.0f, this));
-		buttonDown.addActionListener(new ButtonListener(-speed, 0.0f, 0.0f, this));
-		buttonLeft.addActionListener(new ButtonListener(0.0f, -speed, 0.0f, this));
+//		buttonUp.addActionListener(new ButtonListener(speed, 0.0f, 0.0f, this));
+//		buttonDown.addActionListener(new ButtonListener(-speed, 0.0f, 0.0f, this));
+//		buttonLeft.addActionListener(new ButtonListener(0.0f, -speed, 0.0f, this));
 		robot.addListener(new RobotListenerImpl(this));
-		buttonRight.addActionListener(new ButtonListener(0.0f, speed, 0.0f, this));
-		buttonCL.addActionListener(new ButtonListener(0.0f, 0.0f, -rotSpeed, this));
-		buttonCCL.addActionListener(new ButtonListener(0.0f, 0.0f, rotSpeed, this));
+//		buttonRight.addActionListener(new ButtonListener(0.0f, speed, 0.0f, this));
+//		buttonCL.addActionListener(new ButtonListener(0.0f, 0.0f, -rotSpeed, this));
+//		buttonCCL.addActionListener(new ButtonListener(0.0f, 0.0f, rotSpeed, this));
 		buttonStop.addActionListener(new ButtonListener(0.0f, 0.0f, 0.0f, this));
 
 		add(new JLabel());
 		add(new JLabel());
-		add(buttonUp);
+//		add(buttonUp);
 		add(new JLabel());
 		add(new JLabel());
 		add(new JLabel());
 		add(new JLabel());
-		add(buttonCCL);
-		add(buttonRight);
+//		add(buttonCCL);
+//		add(buttonRight);
 		add(buttonStop);
-		add(buttonLeft);
-		add(buttonCL);
-		add(buttonDown);
+//		add(buttonLeft);
+//		add(buttonCL);
+//		add(buttonDown);
 
 		setMinimumSize(new Dimension(60, 30));
 		setPreferredSize(new Dimension(200, 120));

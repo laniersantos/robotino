@@ -24,7 +24,7 @@ public class ConnectWidget extends JComponent {
 		ConnectWidget.robot = robot;
 
 		buttonConnect = new JButton("Connect");
-		textFieldAddress = new JTextField("127.0.0.1:12080", 12);
+		textFieldAddress = new JTextField("172.26.101.103:12080", 16);
 		
 		setLayout(new FlowLayout());
 		add(textFieldAddress);
