@@ -19,6 +19,7 @@ import rec.robotino.api2.OmniDrive;
  * camera images.
  */
 public class Robot {
+
 	protected final Com _com;
 	protected final Motor _motor1;
 	protected final Motor _motor2;

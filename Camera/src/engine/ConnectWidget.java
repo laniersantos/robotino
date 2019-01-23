@@ -15,30 +15,21 @@ import javax.swing.JTextField;
  */
 @SuppressWarnings("serial")
 public class ConnectWidget extends JComponent {
-	protected final Robot robot;
+	protected static Robot robot;
 
 	protected final JTextField textFieldAddress;
 	protected final JButton buttonConnect;
 
-	protected final JButton buttonWall;
-	protected final FollowWall follow;
-
 	public ConnectWidget(Robot robot) {
-		this.robot = robot;
+		ConnectWidget.robot = robot;
 
 		buttonConnect = new JButton("Connect");
 		textFieldAddress = new JTextField("127.0.0.1:12080", 12);
-
-		buttonWall = new JButton("Wall");
-		buttonWall.addActionListener(new ConnectWallButtonActionListener());
-		this.follow = new FollowWall();
-		this.follow.init(robot);
-
+		
 		setLayout(new FlowLayout());
 		add(textFieldAddress);
 		add(buttonConnect);
-		add(buttonWall);
-
+		
 		setMinimumSize(new Dimension(100, 35));
 		setPreferredSize(new Dimension(100, 35));
 		setMaximumSize(new Dimension(Short.MAX_VALUE, 35));
@@ -47,53 +38,38 @@ public class ConnectWidget extends JComponent {
 		robot.addListener(new RobotListenerImpl());
 	}
 
-	private class ConnectWallButtonActionListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (robot.isConnected()) {
-				try {
-					follow.followWalls();
-				} catch (InterruptedException e1) {
-					System.out.println("Follow Wall error: " + e1.getMessage());
-				}
-			}
-
-			buttonConnect.setEnabled(false);
-		}
-	}
-
 	private class ConnectButtonActionListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (!robot.isConnected()) {
-				System.out.println("Connecting to " + textFieldAddress.getText() + " ...");
-				robot.connect(textFieldAddress.getText(), false);
-			} else {
-				System.out.println("Disconnecting...");
-				robot.disconnect();
-			}
 
-			buttonConnect.setEnabled(false);
+				if (!robot.isConnected()) {
+					System.out.println("Connecting to " + textFieldAddress.getText() + " ...");
+					robot.connect(textFieldAddress.getText(), false);
+				} else {
+					System.out.println("Disconnecting...");
+					robot.disconnect();
+				}
+
+				buttonConnect.setEnabled(false);
 		}
 	}
 
 	private class RobotListenerImpl implements RobotListener {
-		@Override
+
+		Robot robot;
+	
 		public void onConnected() {
 			EventQueue.invokeLater(new Runnable() {
-				@Override
+				
 				public void run() {
 					buttonConnect.setText("Disconnect");
 					buttonConnect.setEnabled(true);
-					buttonWall.setEnabled(true);
 				}
 			});
 		}
 
-		@Override
 		public void onDisconnected() {
 			EventQueue.invokeLater(new Runnable() {
-				@Override
+		
 				public void run() {
 					buttonConnect.setText("Connect");
 					buttonConnect.setEnabled(true);
@@ -101,20 +77,24 @@ public class ConnectWidget extends JComponent {
 			});
 		}
 
-		@Override
 		public void onError(String error) {
 			if (!robot.isConnected())
 				onDisconnected();
 		}
 
-		@Override
 		public void onImageReceived(Image img) {
 		}
 
-		@Override
 		public void onOdometryReceived(double x, double y, double phi) {
+			/*if(x > 2.8){
+				ConnectWidget.robot.setVelocity(0.00f, 1.20f, 0.0f);
+			} else {
+				if(y > 1.0)	{
+					ConnectWidget.robot.setVelocity(1.0f, 0.0f, 0.0f);
+				}
+			}
 			System.out.println("x=" + x + ", y=" + y + ", phi=" + phi);
-
+*/
 		}
 	}
 }
